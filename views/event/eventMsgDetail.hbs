@@ -1,0 +1,201 @@
+{{#each detail}}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>{{this.store_name}}{{this.store_branch_name}} 이벤트메시지 상세</h5>
+            </div>
+            <div class="ibox-content">
+                <form method="get" class="form-horizontal">
+                    <div class="form-group"><label class="col-sm-2 control-label">이벤트 메시지</label>
+                        <div class="col-sm-10"><input type="text" placeholder="이벤트 메시지" class="form-control" value="{{this.event_msg_title}}"></div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group"><label class="col-sm-2 control-label">이벤트 연결 링크</label>
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="originalUrl" placeholder="이벤트 연결 링크" value="{{this.event_detail_real_url}}">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-primary" onclick="start()">Short URL 생성</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group"><label class="col-sm-2 control-label">이벤트 연결 Short 링크</label>
+                        <div class="col-sm-10"><input type="text" id="shortUrl" disabled="" placeholder="이벤트 상세이미지 링크" class="form-control"></div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group"><label class="col-sm-2 control-label">이벤트 상세이미지 링크</label>
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="originalUrl" placeholder="이벤트 상세이미지 링크" value="{{this.event_detail_real_url}}">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">이미지 업로드</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group"><label class="col-sm-2 control-label">이벤트 메시지</label>
+                        <div class="col-sm-10"><textarea placeholder="이벤트 메시지" class="form-control" value="{{this.event_msg_title}}"></textarea></div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-2">
+                            <button class="btn btn-white" onclick="fileinfo()">취소</button>
+                           <button class="btn btn-primary" type="submit">수정</button>
+                        </div>
+                    </div>
+                </form>
+                <!--<form method="POST" enctype="multipart/form-data" action="/event/upload">-->
+                    <!--<div class="form-group"><label class="col-sm-2 control-label">이벤트 연결 Short 링크</label>-->
+                        <!--<div class="col-sm-6">-->
+                            <!--<div class="fileinput fileinput-new input-group" data-provides="fileinput">-->
+                                <!--<div class="form-control" data-trigger="fileinput">-->
+                                    <!--<i class="glyphicon glyphicon-file fileinput-exists"></i>-->
+                                    <!--<span class="fileinput-filename"></span>-->
+                                <!--</div>-->
+                                <!--<span class="input-group-addon btn btn-default btn-file">-->
+                                <!--<span class="fileinput-new">Select file</span>-->
+                                <!--<span class="fileinput-exists">Change</span>-->
+                                <!--<input type="file" name="photo" id="photo"/>-->
+                                <!--</span>-->
+                                <!--<a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>-->
+                            <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="col-sm-4">-->
+                        <!--<button class="btn btn-white" type="submit">업로드</button>-->
+                    <!--</div>-->
+                    <!--</div>-->
+
+                <!--</form>-->
+                <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content animated bounceInRight">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <i class="fa fa-laptop modal-icon"></i>
+                                <h4 class="modal-title">Modal title</h4>
+                                <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
+                            </div>
+                            <form method="POST" id="imageUploadForm" enctype="multipart/form-data">
+                            <div class="modal-body">
+                                    <div class="form-group">
+                                        <div class="">
+                                            <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                                <div class="form-control" data-trigger="fileinput">
+                                                    <i class="glyphicon glyphicon-file fileinput-exists"></i>
+                                                    <span class="fileinput-filename"></span>
+                                                </div>
+                                                <span class="input-group-addon btn btn-default btn-file">
+                                                    <span class="fileinput-new">Select file</span>
+                                                    <span class="fileinput-exists">Change</span>
+                                                    <input type="file" name="photo" id="photo"/>
+                                                </span>
+                                                <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" onclick="uploads()">업로드</button>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{{/each}}
+<a href="/event/eventMsgInsert">등록</a>
+<a href="/event/eventMsgUpdate">수정</a>
+
+<!-- Jasny -->
+<script src="../js/plugins/jasny/jasny-bootstrap.min.js"></script>
+
+<!-- DROPZONE -->
+<script src="../js/plugins/dropzone/dropzone.js"></script>
+
+<!-- CodeMirror -->
+<script src="../js/plugins/codemirror/codemirror.js"></script>
+<script src="../js/plugins/codemirror/mode/xml/xml.js"></script>
+<script>
+    $('li').removeClass('active');
+    $('ul').removeClass('in');
+    $('#menu_message').addClass('active');
+    $('#menu_message_event_ul').addClass('in');
+    $('#menu_message_event_li').addClass('active');
+
+
+    function start() {
+        let originalUrl = $('#originalUrl').val();
+        if(originalUrl === '') {
+          alert('확인해주세요');
+          return false
+        }
+        alert('originalUrl은 '+originalUrl);
+        $.ajax({
+            url:'/event/eventURLChange',
+            type:'POST',
+            cache:false,
+            datatype:'json',
+            data: {
+                'originalUrl': originalUrl
+            },
+            success: function(data) {
+                console.log(data);
+                console.log(data['result']['orgUrl']);
+                $('#shortUrl').val(data['result']['url']);
+                console.log($('#shortUrl').val());
+                var shortUrl = $('#shortUrl').val();
+                if(shortUrl) {
+                  alert('성공')
+                } else {
+                  alert('실패')
+                }
+            },
+            error: function(r, s, e) {
+                console.log(r.status);
+                console.log(e);
+                console.log(e);
+            }
+        });
+    }
+
+    $('#imageUploadForm').on('sumbit', function(){
+
+    });
+
+    function uploads() {
+        var form = $('#imageUploadForm');
+        var formdata = false;
+        if (window.FormData){
+            formdata = new FormData(form[0]);
+        }
+
+        console.log(formdata)
+        var formAction = form.attr('action');
+        $.ajax({
+            url         : '/event/upload',
+            data        : formdata ? formdata : form.serialize(),
+            cache       : false,
+            contentType : false,
+            processData : false,
+            type        : 'POST',
+            success     : function(data, textStatus, jqXHR){
+              alert('성공적으로 업로드 되었습니다.');
+            }
+        });
+    }
+
+    function fileinfo() {
+      var file2 = $('#file').val();
+        alert(file2);
+    }
+
+</script>

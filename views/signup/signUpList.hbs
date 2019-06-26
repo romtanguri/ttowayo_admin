@@ -1,0 +1,163 @@
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>가입신청 승인 리스트 </h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="ibox-content m-b-sm border-bottom">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label" for="order_id">매장명</label>
+                                    <input type="text" id="store_name" name="store_name" value="" placeholder="#매장명 입력"
+                                           class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label" for="status">승인 상태</label>
+                                    <select class="input-sm form-control input-s-sm inline"
+                                            name="store_signup_status_type">
+                                        <option value="">전체</option>
+                                        <option value="W">승인대기</option>
+                                        <option value="C">승인완료</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label" for="customer">적립타입</label>
+                                    <select class="input-sm form-control input-s-sm inline" name="store_saving_type">
+                                        <option value="">전체</option>
+                                        <option value="S">도장(스탬프)</option>
+                                        <option value="P">포인트</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group" id="data_5">
+                                    <label class="col-form-label" for="amount">등록 검색일자</label>
+                                    <div class="input-daterange input-group" id="datepicker">
+                                        <input type="text" class="form-control" name="reg_start_date" value="">
+                                        <span class="input-group-addon"> ~ </span>
+                                        <input type="text" class="form-control" name="reg_end_date" value="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="txt-center">
+                            <button class="btn btn-secondary" onclick="fnSearchList();">검색</button>
+                        </div>
+                    </div>
+                    <table class="footable table table-bordered" data-page-size="8" data-filter=#filter>
+                        <thead>
+                        <tr>
+                            <th style="text-align: center">번호</th>
+                            <th style="text-align: center">매장명</th>
+                            <th style="text-align: center">업종</th>
+                            <th style="text-align: center">승인상태</th>
+                            <th style="text-align: center">승인일</th>
+                            <th style="text-align: center">등록일</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{# each signUpListResult }}
+                            <tr class="gradeX" style="text-align: center">
+                                <td>{{math @index "+" 1}}</td>
+                                <td><a href="/signup/signUpD?id={{this.store_signup_no}}
+                                    ">{{this.store_name}} {{this.store_branch_name}}</a></td>
+                                <td>{{this.store_business_type_name}}</td>
+                            {{#ifeq store_signup_status_type 'C'}}
+                                <td>승인완료</td>
+                            {{else}}
+                                <td>승인대기</td>
+                            {{/ifeq}}
+                                <td>{{#ifeq this.completed_date null}}
+                                    -
+                                {{else}}
+                                    {{this.completed_date}}
+                                {{/ifeq}}
+                                </td>
+                                <td>{{this.reg_date}}</td>
+                            </tr>
+                        {{/each}}
+
+                        </tbody>
+                    </table>
+                    <div><ul class="pagination"></ul></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let regStartDate = $('input[name=reg_start_date]');
+    let regEndDate = $('input[name=reg_end_date]');
+    let statusType = $("select[name=store_signup_status_type]");
+    let savingType = $("select[name=store_saving_type]");
+    $(document).ready(function () {
+        $('.footable').footable();
+
+        {{#ifeq searchData.st 'C'}}
+            statusType.val("C").prop("selected", true);
+        {{else ifeq searchData.st 'W'}}
+            statusType.val("W").prop("selected", true);
+        {{else}}
+            statusType.val("").prop("selected", true);
+        {{/ifeq}}
+
+
+        {{#ifeq searchData.svt 'S'}}
+            savingType.val("S").prop("selected", true);
+        {{else ifeq searchData.svt 'P'}}
+            savingType.val("P").prop("selected", true);
+        {{else}}
+            savingType.val("").prop("selected", true);
+        {{/ifeq}}
+
+        regStartDate.val('{{searchData.sd}}');
+        regEndDate.val('{{searchData.ed}}');
+
+        $('li').removeClass('active');
+        $('ul').removeClass('in');
+        $('#menu_signup').addClass('active');
+        $('#menu_signup_ul').addClass('in');
+        $('#menu_signup_signup_li').addClass('active');
+
+        $('#data_5 .input-daterange').datepicker({
+            keyboardNavigation: false,
+            forceParse: false,
+            autoclose: true,
+            format: 'yyyy-mm-dd'
+        });
+    });
+
+    function fnSearchList() {
+
+        let st = statusType.val();
+        let sn = $('input[name=store_name]').val();
+        let svt = savingType.val();
+        let ed = regStartDate.val();
+        let sd = regEndDate.val();
+
+        if (sd !== '') {
+          if (ed === '') {
+              alert('검색 일자를 선택해주세요.');
+              regEndDate.focus();
+              return;
+          }
+        } else if (ed !== '') {
+            if (sd === '') {
+                alert('검색 일자를 선택해주세요.');
+                regStartDate.focus();
+                return;
+            }
+        }
+        location.href = '/signup/signUpLS?sn='+sn+'&st='+st+'&svt='+svt+'&ed='+ed+'&sd='+sd;
+    }
+</script>

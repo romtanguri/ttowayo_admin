@@ -1,0 +1,77 @@
+<div class="col-lg-12">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>Custom responsive table </h5>
+            <div class="ibox-tools">
+                <a class="collapse-link">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-wrench"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="#">Config option 1</a>
+                    </li>
+                    <li><a href="#">Config option 2</a>
+                    </li>
+                </ul>
+                <a class="close-link">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+        </div>
+        <div class="ibox-content">
+            <div class="row">
+                <div class="col-sm-5 m-b-xs"><select class="input-sm form-control input-s-sm inline">
+                    <option value="0">Option 1</option>
+                    <option value="1">Option 2</option>
+                    <option value="2">Option 3</option>
+                    <option value="3">Option 4</option>
+                </select>
+                </div>
+                <div class="col-sm-4 m-b-xs">
+                </div>
+                <div class="col-sm-3">
+                    <div class="input-group"><input type="text" placeholder="Search" class="input-sm form-control"> <span class="input-group-btn">
+                                        <button type="button" class="btn btn-sm btn-primary"> Go!</button> </span></div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+
+                        <th></th>
+                        <th>매장명 </th>
+                        <th>이벤트메시지 문구 </th>
+                        <th>이벤트 단축 URL</th>
+                        <th>수정일</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each eventMsgList}}
+                    <tr>
+                        <td><input type="checkbox" class="i-checks" name="input[]"></td>
+                        <td><a href="/event/eventMsgDetail?eventNo={{this.event_no}}">{{this.store_name}}{{this.store_branch_name}}</a></td>
+                        <td>{{this.event_title}}</td>
+                        <td>{{this.event_detail_short_url}}</td>
+                        <td>{{this.up_date}}</td>
+                    </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    $('li').removeClass('active');
+    $('ul').removeClass('in');
+    $('#menu_message').addClass('active');
+    $('#menu_message_event_ul').addClass('in');
+    $('#menu_message_event_li').addClass('active');
+</script>

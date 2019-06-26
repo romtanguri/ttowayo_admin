@@ -1,0 +1,568 @@
+{{#each signUpDetail}}
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <h5><strong>{{this.store_name}} {{this.store_branch_name}}</strong> 가입신청서 상세</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <form method="post" id="signUpForm">
+                            <input type="hidden" class="form-control" name="store_signup_no" value="{{this.store_signup_no}}">
+                            <input type="hidden" class="form-control" name="store_signup_status_type" value="{{this.store_signup_status_type}}">
+                            <input type="hidden" class="form-control" name="manager_id" value="{{this.manager_id}}">
+                            <input type="hidden" class="form-control" name="store_contact_period" value="{{this.store_contact_period}}">
+                            <input type="hidden" class="form-control" name="manager_password" value="{{this.manager_password}}" >
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">상호명</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" name="store_name"
+                                           value="{{this.store_name}}" data-validation="required" placeholder="#상호명">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">지점명</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" placeholder="" name="store_branch_name"
+                                           value="{{this.store_branch_name}}">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">아이디</label>
+                                <div class="col-sm-5">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="" name="manager_id"
+                                               value="{{this.manager_id}}" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">업종</label>
+                                <div class="col-sm-5"><input type="text" class="form-control" placeholder=""
+                                                             name="store_business_type_name"
+                                                             value="{{store_business_type_name}}">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">대표번호</label>
+                                <div class="col-sm-5"><input type="text" class="form-control" placeholder=""
+                                                             name="store_tel" value="{{this.store_tel}}" data-validation="required">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">사업자등록번호</label>
+                                <div class="col-sm-5">
+                                    <input type="text" placeholder="" class="form-control" name="store_business_number"
+                                           value="{{this.store_business_number}}" data-validation="required">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">법인등록번호</label>
+                                <div class="col-sm-5">
+                                    <input type="text" placeholder="" class="form-control"
+                                           name="store_corporation_number" value="{{this.store_corporation_number}}">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">주소</label>
+                                <div class="col-sm-6">
+                                    <input name="store_zip_code" id="zip_code" type="text" class="form-control inline"
+                                           placeholder="우편번호" style="width: 100px;" readonly=""
+                                           value="{{this.store_zip_code}}" data-validation="required">
+                                    <button id="addressSearchPopup" type="button" class="btn btn-primary m-l-sm"
+                                            style="margin-bottom: 5px" onclick="sample6_execDaumPostcode()">주소검색
+                                    </button>
+                                    <input name="store_address" id="address" type="text"
+                                           class="form-control required m-b-xs" placeholder="도로명주소"
+                                           readonly="" aria-required="true" value="{{this.store_address}}">
+                                    <input name="store_address_detail" id="address_detail"
+                                           value="{{this.store_address_detail}}" type="text" class="form-control"
+                                           placeholder="#상세주소">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">담당자 성명</label>
+                                <div class="col-sm-5">
+                                    <input type="text" placeholder="" class="form-control" name="store_operator_name"
+                                           value="{{this.store_operator_name}}" data-validation="required">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group row"><label class="col-sm-2 col-form-label">담당자 직급(직책)</label>
+                                <div class="col-sm-5">
+                                    <input type="text" placeholder="" class="form-control"
+                                           name="store_operator_position" value="{{this.store_operator_position}}">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">담당자 휴대폰</label>
+                                <div class="col-sm-5">
+                                    <input type="text" placeholder="" class="form-control" name="store_operator_phone"
+                                           value="{{this.store_operator_phone}}" data-validation="required">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">담당자 유선전화</label>
+                                <div class="col-sm-5">
+                                    <input type="text" placeholder="" class="form-control" name="store_operator_tel"
+                                           value="{{this.store_operator_tel}}">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">담당자 이메일</label>
+                                <div class="col-sm-5">
+                                    <input type="text" placeholder="" class="form-control" name="store_operator_email"
+                                           value="{{this.store_operator_email}}" data-validation="required">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">계약기간</label>
+                                <div class="col-sm-2">
+                                    <div class="input-group m-b">
+                                        <input type="text" placeholder="" class="form-control txt-right"
+                                               value="{{this.store_contact_period}}" disabled>
+                                        <div class="input-group-append">
+                                            <span class="input-group-addon">개월</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group row"><label class="col-sm-2 col-form-label">입금계좌<span
+                                    class="text-danger">*</span></label>
+                                <div class="col-sm-5">
+                                    <div class="input-group m-b">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-addon">예금주</span>
+                                        </div>
+                                        <input type="text" placeholder="" class="form-control" name="store_account_name"
+                                               value="{{this.store_account_name}}" data-validation="required">
+                                    </div>
+                                    <div class="input-group m-b">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-addon">은행명</span>
+                                        </div>
+                                        <input type="text" placeholder="" class="form-control" name="store_bank_name"
+                                               value="{{this.store_bank_name}}" data-validation="required">
+                                    </div>
+                                    <div class="input-group m-b">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-addon">계좌번호</span>
+                                        </div>
+                                        <input type="text" placeholder="" class="form-control" name="store_account"
+                                               value="{{this.store_account}}" data-validation="required">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group row"><label class="col-sm-2 col-form-label">이용수수료</label>
+                                <div class="col-sm-2">
+                                    <div class="input-group m-b">
+                                        <input type="text" placeholder="" class="form-control txt-right"
+                                               name="store_use_fees" value="{{this.store_use_fees}}" data-validation="required">
+                                        <div class="input-group-append">
+                                            <span class="input-group-addon">원</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group row"><label class="col-sm-2 col-form-label">결제수수료</label>
+                                <div class="col-sm-2">
+                                    <div class="input-group m-b">
+                                        <input type="text" placeholder="" class="form-control txt-right"
+                                               name="store_shopping_fees" value="{{this.store_shopping_fees}}" data-validation="required">
+                                        <div class="input-group-append">
+                                            <span class="input-group-addon">%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group row"><label class="col-sm-2 col-form-label">적립타입<span
+                                    class="text-danger">*</span></label>
+                                <div class="col-sm-2" style="padding-top: 5px">
+                                <span style="padding-right: 10px">
+                                    <label>
+                                        <input type="radio" name="store_saving_type"
+                                               {{#ifeq this.store_saving_type 'S'}}checked{{/ifeq}}
+                                               onclick="whatSavingType('S');" value="S"> 도장
+                                    </label>
+                                </span>
+                                    <label>
+                                        <input type="radio" value="P" name="store_saving_type"
+                                               {{#ifeq this.store_saving_type 'P'}}checked{{/ifeq}}
+                                               onclick="whatSavingType('P');"> 포인트
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group row"><label class="col-sm-2 col-form-label">적립 상세<span
+                                    class="text-danger">*</span></label>
+
+                                <div class="col-sm-8">
+                                    <div class="row" style="padding-bottom: 5px;display:none" id="savingRule">
+                                        <div class="input-group m-b">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-addon">도장(스탬프)</span>
+                                            </div>
+                                            <input type="text" placeholder="갯수" class="form-control txt-right"
+                                                   name="store_saving_cnt" value="{{this.store_saving_cnt}}">
+                                            <div class="input-group-append">
+                                                <span class="input-group-addon">개</span>
+                                            </div>
+                                            <input type="text" placeholder="상품" class="form-control"
+                                                   name="saving_coupon_name" value="{{this.saving_coupon_name}}">
+                                            <div class="input-group-append">
+                                                <span class="input-group-addon">적립쿠폰 발행(유효기간 12개월)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="padding-bottom: 5px;display:none" id="pointRule">
+                                        <div class="input-group m-b">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-addon">결제금액의</span>
+                                            </div>
+                                            <!-- store_saving_cnt 는 동일한 컬럼을 쓰지만 name은 타입에 따라 다르게-->
+                                            <input type="text" placeholder="퍼센트" class="form-control txt-right"
+                                                   name="store_point_cnt" value="{{this.store_saving_cnt}}">
+                                            <div class="input-group-append">
+                                                <span class="input-group-addon">% 적립</span>
+                                            </div>
+                                            <input type="text" placeholder="포인트" class="form-control txt-right"
+                                                   name="point_use_cnt" value="{{this.point_use_cnt}}">
+                                            <div class="input-group-append">
+                                                <span class="input-group-addon">포인트 사용가능</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group row"><label class="col-sm-2 col-form-label">문자메시지 신청<span
+                                    class="text-danger">*</span>
+                                <br/>
+                                <small class="text-navy">건당 SMS 13원, LMS 29원입니다.(부가세 포함)</small>
+                            </label>
+                                <div class="col-sm-10">
+                                    <div style="font-size: 16px; padding:5px 0px 10px 0px"><i class="fa fa-star"></i>
+                                        필수항목
+                                    </div>
+                                    <div id="msgStamp">
+                                        <div class="i-checks"><label>
+                                            <input type="checkbox" id="msg_ss_yn" checked="checked" disabled>
+                                            <input type="hidden" name="msg_ss_yn" value="{{ this.msg_ss_yn }}">
+                                            <i></i> 도장(스탬프) 적립 시 알림 문자 </label>
+                                        </div>
+                                        <div class="i-checks"><label>
+                                            <input type="checkbox" id="msg_sc_yn" checked="checked" disabled>
+                                            <input type="hidden" name="msg_sc_yn" value="{{ this.msg_sc_yn }}">
+                                            <i></i> 적립쿠폰 발행 시 알림 문자 </label>
+                                        </div>
+                                    </div>
+                                    <div id="msgPoint">
+                                        <div class="i-checks"><label>
+                                            <input type="checkbox" id="msg_ps_yn" checked="checked" disabled>
+                                            <input type="hidden" name="msg_ps_yn" value="{{ this.msg_ps_yn }}">
+                                            <i></i> 포인트 적립 시 알림 문자 </label>
+                                        </div>
+                                        <div class="i-checks"><label>
+                                            <input type="checkbox" id="msg_pd_yn" checked="checked" disabled>
+                                            <input type="hidden" name="msg_pd_yn" value="{{ this.msg_pd_yn }}">
+                                            <i></i> 포인트 사용 시 알림 문자 </label>
+                                        </div>
+                                    </div>
+                                    <div class="i-checks"><label>
+                                        <input type="checkbox" id="msg_cu_yn" checked="checked" disabled>
+                                        <input type="hidden" name="msg_cu_yn" value="{{ this.msg_cu_yn }}">
+                                        <i></i> 이벤트쿠폰 발행 시 알림 문자</label>
+                                    </div>
+                                    <div class="i-checks"><label>
+                                        <input type="checkbox" id="msg_ga_yn" checked="checked" disabled>
+                                        <input type="hidden" name="msg_ga_yn" value="{{ this.msg_ga_yn }}">
+                                        <i></i> 구매 선물/상품 수신자에게 알림 문자 </label>
+                                    </div>
+
+                                    <div style="font-size: 16px;padding:5px 0px 10px 0px"><i class="fa fa-edit"></i>
+                                        선택항목
+                                    </div>
+                                    <div class="i-checks"><label>
+                                        <input type="checkbox" id="msg_gb_yn"
+                                               {{#ifeq this.msg_gb_yn 'Y'}}checked="checked"{{/ifeq}}
+                                               onchange="fnCheckBox('msg_gb_yn')">
+                                        <input type="hidden" name="msg_gb_yn" value="{{ this.msg_gb_yn }}">
+                                        <i></i> 구매 선물/상품 구매자에게 알림 문자 </label>
+                                    </div>
+                                    <div class="i-checks"><label>
+                                        <input type="checkbox" id="msg_ce_yn"
+                                               {{#ifeq this.msg_ce_yn 'Y'}}checked="checked"{{/ifeq}}
+                                               onclick="fnCheckBox('msg_ce_yn');">
+                                        <input type="hidden" name="msg_ce_yn" value="{{ this.msg_ce_yn }}">
+                                        <i></i> 이벤트쿠폰 유효기간 만료(7일) 전 알림 문자 </label>
+                                    </div>
+                                    <div class="i-checks"><label>
+                                        <input type="checkbox" id="msg_ge_yn"
+                                               {{#ifeq this.msg_ge_yn 'Y'}}checked="checked"{{/ifeq}}
+                                               onclick="fnCheckBox('msg_ge_yn');">
+                                        <input type="hidden" name="msg_ge_yn" value="{{ this.msg_ge_yn }}">
+                                        <i></i> 구매 선물/상품 유효기간 만료(7일) 전 알림 문자 </label>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group row">
+                                <div class="col-sm-12 col-sm-offset-2  text-center">
+                                    <a href="/signup/signUpL" type="button" class="btn btn-white btn-sm font16">취소</a>
+                                    {{#ifeq store_signup_status_type 'C'}}
+                                        <button type="button" class="btn btn-primary btn-sm font16" disabled>매장 등록 완료
+                                        </button>
+                                    {{else}}
+                                        <button type="button" id="signupSave" class="btn btn-primary btn-sm font16">
+                                            가입신청서 저장
+                                        </button>
+                                        <button type="button" id="signupDone" class="btn btn-danger btn-sm font16">
+                                            검수완료(매장등록)
+                                        </button>
+                                    {{/ifeq}}
+                                </div>
+                            </div>
+                        </form>
+                        <!-- Image loader -->
+                        <div id='loader' style='display: none;'>
+                            <div class="sk-circle12 sk-circle"></div>
+                        </div>
+                        <!-- Image loader -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{{/each}}
+<script>
+    $(document).ready(function () {
+
+        //메뉴 active
+        $('li').removeClass('active');
+        $('ul').removeClass('in');
+        $('#menu_signup').addClass('active');
+        $('#menu_signup_ul').addClass('in');
+        $('#menu_signup_li').addClass('active');
+
+        $.validate({
+            form: '#signUpForm',
+        });
+
+        let type = $('input[name="store_saving_type"]:checked').val();
+
+        if (type === 'S') {
+            $('#savingRule').show();
+            $('#pointRule').hide();
+            $('#msgStamp').show();
+            $('#msgPoint').hide();
+        } else {
+            $('#pointRule').show();
+            $('#savingRule').hide();
+            $('#msgPoint').show();
+            $('#msgStamp').hide();
+        }
+    });
+
+    // 적립타입에 따른 조건들 show/hide
+    function whatSavingType(type) {
+        if (type === 'S') {
+            $('input[name=msg_ps_yn]').val('Y');
+            $('input[name=msg_pd_yn]').val('Y');
+            $('input[name=msg_ss_yn]').val('N');
+            $('input[name=msg_sc_yn]').val('N');
+            $('#savingRule').show();
+            $('#pointRule').hide();
+            $('#msgStamp').show();
+            $('#msgPoint').hide();
+        } else {
+            $('input[name=msg_ps_yn]').val('Y');
+            $('input[name=msg_pd_yn]').val('Y');
+            $('input[name=msg_ss_yn]').val('N');
+            $('input[name=msg_sc_yn]').val('N');
+            $('#pointRule').show();
+            $('#savingRule').hide();
+            $('#msgPoint').show();
+            $('#msgStamp').hide();
+        }
+    }
+
+    function fnCheckBox(id) {
+        console.log($("input:checkbox[id='msg_gb_yn']").is(":checked"));
+        if ($("#" + id).is(":checked")) {
+            let name = "input[name=" + id + "]";
+            $(name).val('Y');
+        } else {
+            let name = "input[name=" + id + "]";
+            $(name).val('N');
+        }
+    }
+
+    let $form = $("#signUpForm");
+
+    $form.find("#signupSave").on('click', function (e) {
+        console.log($form.serialize());
+        let isOk = confirm("가입신청서를 수정하시겠습니까?");
+        if (isOk) {
+            $.ajax({
+                dataType: 'json',
+                type: 'post',
+                url: '/signup/signUpU',
+                data: $form.serialize(),
+            }).fail((jqXHR, textStatus, errorThrown) => {
+                alert('매장 등록시에 오류가 발생했습니다. 관리자에게 문의 해주세요.');
+            }).then((data, textStatus, jqXHR) => {
+                alert(data.msg);
+                location.reload();
+            });
+        }
+    });
+
+    $form.find("#signupDone").on('click', function (e) {
+        let type = $('input[name="store_saving_type"]:checked').val();
+        if ($('input[name=store_name]').val() === '') {
+          alert('상호명을 입력해주세요.');
+            $('input[name=store_name]').focus();
+            return;
+        }
+        if ($('input[name=store_business_type_name]').val() === '') {
+            alert('업종을 입력해주세요.');
+            $('input[name=store_business_type_name]').focus();
+            return;
+        }
+        if ($('input[name=store_tel]').val() === '') {
+            alert('대표번호를 입력해주세요.');
+            $('input[name=store_tel]').focus();
+            return;
+        }
+        if ($('input[name=store_business_number]').val() === '') {
+            alert('사업자등록번호를 입력해주세요.');
+            $('input[name=store_business_number]').focus();
+            return;
+        }
+        if ($('input[name=zip_code]').val() === '') {
+            alert('주소를 입력해주세요.');
+            $('input[name=zip_code]').focus();
+            return;
+        }
+        if ($('input[name=store_operator_name]').val() === '') {
+            alert('담당자 성명을 입력해주세요.');
+            $('input[name=store_operator_name]').focus();
+            return;
+        }
+
+        if ($('input[name=store_operator_phone]').val() === '') {
+            alert('담당자 휴대폰을 입력해주세요.');
+            $('input[name=store_operator_phone]').focus();
+            return;
+        }
+
+        if ($('input[name=store_operator_email]').val() === '') {
+            alert('담당자 이메일을 입력해주세요.');
+            $('input[name=store_operator_email]').focus();
+            return;
+        }
+
+        if ($('input[name=store_account_name]').val() === '') {
+            alert('예금주를 입력해주세요.');
+            $('input[name=store_account_name]').focus();
+            return;
+        }
+
+        if ($('input[name=store_bank_name]').val() === '') {
+            alert('은행명을 입력해주세요.');
+            $('input[name=store_bank_name]').focus();
+            return;
+        }
+
+        if ($('input[name=store_account]').val() === '') {
+            alert('계좌번호를 입력해주세요.');
+            $('input[name=store_account]').focus();
+            return;
+        }
+
+        if ($('input[name=store_use_fees]').val() === '') {
+            alert('이용수수료를 입력해주세요.');
+            $('input[name=store_use_fees]').focus();
+            return;
+        }
+
+        if ($('input[name=store_shopping_fees]').val() === '') {
+            alert('결제수수료를 입력해주세요.');
+            $('input[name=store_shopping_fees]').focus();
+            return;
+        }
+
+        if (type === 'S') {
+            if ($('input[name=store_saving_cnt]').val() === '') {
+                alert('적립 수를 입력해주세요.');
+                $('input[name=store_saving_cnt]').focus();
+                return;
+            }
+            if ($('input[name=saving_coupon_name]').val() === '') {
+                alert('적립 쿠폰명을 입력해주세요.');
+                $('input[name=saving_coupon_name]').focus();
+                return;
+            }
+        } else {
+            if ($('input[name=store_point_cnt]').val() === '') {
+                alert('적립 포인트 %를 입력해주세요.');
+                $('input[name=store_point_cnt]').focus();
+                return;
+            }
+            if ($('input[name=point_use_cnt]').val() === '') {
+                alert('포인트 사용 가능한 수를 입력해주세요.');
+                $('input[name=point_use_cnt]').focus();
+                return;
+            }
+        }
+        let isOk = confirm("검수를 완료하시겠습니까?");
+        if (isOk) {
+            $.ajax({
+                dataType: 'json',
+                type: 'post',
+                url: '/signup/signUpStoreI',
+                data: $form.serialize()
+            }).fail((jqXHR, textStatus, errorThrown) => {
+                alert('매장 등록시에 오류가 발생했습니다. 관리자에게 문의 해주세요.');
+            }).then((data, textStatus, jqXHR) => {
+                alert(data.msg);
+                location.reload();
+            });
+        }
+    });
+</script>

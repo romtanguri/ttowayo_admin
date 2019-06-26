@@ -1,0 +1,25 @@
+<div id="page-wrapper" class="gray-bg">
+    <div class="row border-bottom">
+        <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+            </div>
+            <ul class="nav navbar-top-links navbar-right">
+                <li>
+                    {{#ifeq loggedIn ''}}
+                        <a href="/auth">
+                            <i class="fa fa-sign-out"></i>로그인
+                        </a>
+                    {{else}}
+                        <a href="/auth/logout">
+                            <i class="fa fa-sign-out"></i>{{username}} 로그아웃
+                        </a>
+                    {{/ifeq}}
+
+                </li>
+            </ul>
+
+        </nav>
+    </div>
+    {{{body}}}
+</div>
+
