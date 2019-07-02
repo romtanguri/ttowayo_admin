@@ -5,7 +5,6 @@ const {selectDbExecute} = require('../com/utils_function');
 
 router.get('/', function (req, res, next) {
   let loggedIn = req.session.loggedIn;
-  console.log(req.session.loggedIn);
   if (loggedIn) {
     res.redirect('/');
   } else {

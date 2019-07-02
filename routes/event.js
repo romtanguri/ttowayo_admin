@@ -15,7 +15,6 @@ const storage = multer.diskStorage({
     array[1] = '.' + array[1];
     array.splice(1, 0, Date.now().toString());
     const result = array.join('');
-    console.log(result);
     callback(null, result);
   }
 });
@@ -34,24 +33,17 @@ router.post('/upload', upload.array('photo',2) , async function(req, res, next) 
   let mimeType = '';
   let size = 0;
 
-  console.log(files);
   if(Array.isArray(files)) {
-    console.log(('files is arry'));
-
     originalName = files[0].originalname;
     fileName = files[0].filename;
     mimeType = files[0].mimetype;
     size = files[0].size;
   } else {
-    console.log(('files is not arry'));
-
     originalName = files[0].originalname;
     fileName = files[0].filename;
     mimeType = files[0].mimetype;
     size = files[0].size;
   }
-
-  console.log(`${originalName}, ${fileName}, ${mimeType}, ${size}`);
 
   const endpoint = new AWS.Endpoint('https://kr.object.ncloudstorage.com');
   const region = 'kr-standard';
@@ -96,12 +88,10 @@ router.post('/upload', upload.array('photo',2) , async function(req, res, next) 
 });
 
 router.get('/', async function (req, res, next) {
-  let loggedin = req.session.loggedin;
-  console.log(req.session.loggedin);
-  if (!loggedin) {
+  let loggedIn = req.session.loggedIn;
+  if (!loggedIn) {
     res.redirect('/auth');
   } else {
-    //console.log(eventMsgListQuery);
     let eventMsgListQuery = `SELECT *, DATE_FORMAT(tsm.up_date, "%Y-%m-%d %r") AS up_date FROM tb_store_msg tsm
                                      JOIN tb_store ts 
                                        ON ts.store_id = tsm.store_id 
@@ -111,7 +101,6 @@ router.get('/', async function (req, res, next) {
                                        AND tsm.active_yn = 'Y'
                                        AND te.active_yn = 'Y'`;
     let eventMsgListResult = await selectDbExecute(eventMsgListQuery);
-
 
     res.render('event/eventMsgList', {eventMsgList: eventMsgListResult});
   }
@@ -125,14 +114,11 @@ router.get('/eventMsgDetail', async function (req, res, next) {
                                      WHERE te.event_no = ${eventNo}
                                       AND te.active_yn = 'Y'`;
   let eventMsgDetailResult = await selectDbExecute(eventMsgDetailQuery);
-  console.log(eventMsgDetailResult)
   res.render('event/eventMsgDetail', {detail : eventMsgDetailResult});
 });
 
 router.post('/eventURLChange', async function (req, res, next) {
-  console.log(req.body);
   let originalUrl = req.body['originalUrl'];
-  console.log('originalUrl', originalUrl);
   let client_id = 'fll6h7s92x';
   let client_secret = 'ewjBqfqDTAcJxd9ankCpH38PcQqPeqbTaCopEvop';
   let query = encodeURI(originalUrl);
@@ -147,27 +133,21 @@ router.post('/eventURLChange', async function (req, res, next) {
     json:true,
     headers: { 'X-NCP-APIGW-API-KEY-ID': client_id, 'X-NCP-APIGW-API-KEY': client_secret },
   };
-  console.log(options);
   request.post(options, function(error, response, body) {
     if (!error && response.statusCode == 200) {
       // res.writeHead(200, { 'Content-Type': 'text/json;charset=utf-8' });
       // res.end(body);
-      console.log(body)
-      console.log(body.message)
       res.send(body);
     } else {
       res.status(response.statusCode).end();
-      console.log('error = ' + response.statusCode);
     }
   });
 });
 
 
 router.post('/eventDetailImageUpload', async function (req, res, next) {
+});
 
-
-
-})
 router.post('/eventMsgInsert', async function (req, res, next) {
   console.log('등록');
 });

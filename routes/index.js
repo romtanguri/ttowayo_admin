@@ -16,7 +16,6 @@ router.get('/', async function (req, res, next) {
 
   let stores = [];
   for (const store of storesResult) {
-    console.log(JSON.stringify(store));
     // 적립 쿠폰 카운트
     let [savingCouponCntResult] = await selectDbExecute(couponPublishCntQuery(store.store_id,'S', startDate, endDate));
     store.savingCouponCnt = formatNumber(savingCouponCntResult.couponPublishCnt);
@@ -33,7 +32,6 @@ router.get('/', async function (req, res, next) {
 
     // 적립 수
     if (store.saving_type === 'S') {
-      console.log(stampSavingCntQuery(store.store_id,  startDate, endDate));
       let [stampSavingCntResult] = await selectDbExecute(stampSavingCntQuery(store.store_id,  startDate, endDate));
       store.savingCnt = formatNumber(parseInt(stampSavingCntResult.savingCnt));
       store.savingHistoryCnt = formatNumber(parseInt(stampSavingCntResult.savingHistoryCnt));

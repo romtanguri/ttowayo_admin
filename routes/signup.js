@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../config/db_connection');
-const moment = require('moment');
 const {dbAffectedRows, selectDbExecute, fnLatLong, filter, shortUrl, createLog} = require('../com/utils_function');
 const {
   signUpListQuery, signUpListSearchQuery, signUpDetailQuery, signUpStoreIdQuery, storeInsertQuery, signUpCompleteUpdateQuery,
@@ -233,7 +232,6 @@ router.post('/signUpStoreI', async function (req, res, next) {
 });
 
 router.get('/bizInfoStoreL', async function (req, res, next) {
-
   let loggedIn = req.session.loggedIn;
   if (loggedIn) {
     let storeListResult = await storeList();
@@ -243,8 +241,6 @@ router.get('/bizInfoStoreL', async function (req, res, next) {
   } else {
     res.redirect('/auth');
   }
-
 });
-
 
 module.exports = router;
