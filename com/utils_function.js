@@ -34,8 +34,8 @@ let fnLatLong = async function(addrs) {
   })
     .then( response => {
       latLong = {
-        lat :response.data.documents[0].x,
-        long:response.data.documents[0].y
+        lat :response.data.documents[0].Y,
+        long:response.data.documents[0].x
       };
       return latLong;
     });
